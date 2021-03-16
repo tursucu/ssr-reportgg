@@ -4,8 +4,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import styled from "styled-components";
 
-const Title = styled.h1`
-  font-size: 50px;
+const Title = styled.h2`
+  font-size: 25px;
   color: ${({ theme }) => theme.colors.primary};
 `;
 
@@ -30,3 +30,13 @@ export const getStaticProps = async ({ locale }) => ({
     ...(await serverSideTranslations(locale, ["common"])),
   },
 });
+
+export const getStaticPaths = ({ locales }) => {
+  return {
+    paths: [
+      { params: { slug: "xrp" }, locale: "en" },
+      { params: { slug: "xrp" }, locale: "de" },
+    ],
+    fallback: false,
+  };
+};
